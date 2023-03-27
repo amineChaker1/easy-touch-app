@@ -5,7 +5,7 @@ import CartItems from "../CartItems";
 import Checkout from "../Checkout";
 const ProductList = () => {
   const [cartProduct, setCartProduct] = useState([]);
-  const [showCheckout, setShowCheckout] = useState(false);
+
   /*const CartItem = (e) => {
     return e;
   };
@@ -18,7 +18,7 @@ const ProductList = () => {
 
   return (
     <div className="grid md:grid-flow-row md:grid-cols-4 md:grid-rows-1 grid-rows-2 grid-flow-col">
-      <div className="md:col-span-3 order-2 md:order-1">
+      <div className="md:col-span-3  order-1">
         <div className="grid gap-2 grid-cols-1 md:grid-cols-3">
           {data.map((product) => (
             <div className="md:w-5/6 h-fit border-2 mb-5 bg-con border-black rounded-3xl">
@@ -36,7 +36,6 @@ const ProductList = () => {
                   onClick={() => handleClick(product)}
                   className="float-right flex items-center gap-1 pr-2 p-1 lg:p-2 rounded-tl-xl text-black rounded-br-3xl bg-primary"
                 >
-                  Commander
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -57,28 +56,9 @@ const ProductList = () => {
           ))}
         </div>
       </div>
-      <div className="md:col-span-1 text-white order-1 md:order-2">
+      <div className="md:col-span-1 text-white  order-2">
         <h1 className="text-white mb-2">Your Cart Items</h1>
         <CartItems cartProduct={cartProduct} />
-        {cartProduct.length !== 0 && (
-          <div className="flex items-center  mt-8 justify-between">
-            <p>
-              Your Total is{" "}
-              <span className="font-extrabold text-primary">
-                {" "}
-                {cartProduct.reduce((a, c) => a + c.price, 0)}{" "}
-              </span>{" "}
-            </p>
-            <button
-              onClick={() => setShowCheckout(true)}
-              className="bg-primary rounded-lg text-black py-1 px-2"
-            >
-              {" "}
-              Checkout{" "}
-            </button>
-          </div>
-        )}
-        {showCheckout && <Checkout />}
       </div>
     </div>
   );
