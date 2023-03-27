@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import data from "../../data.json";
 import dish1 from "../../assets/dish2.png";
 import CartItems from "../CartItems";
+import Checkout from "../Checkout";
 const ProductList = () => {
   const [cartProduct, setCartProduct] = useState([]);
+  const [showCheckout, setShowCheckout] = useState(false);
   /*const CartItem = (e) => {
     return e;
   };
@@ -60,15 +62,23 @@ const ProductList = () => {
         <CartItems cartProduct={cartProduct} />
         {cartProduct.length !== 0 && (
           <div className="flex items-center  mt-8 justify-between">
-            <span>
-              Your Total is {cartProduct.reduce((a, c) => a + c.price, 0)}{" "}
-            </span>
-            <button className="bg-primary rounded-lg text-black py-1 px-2">
+            <p>
+              Your Total is{" "}
+              <span className="font-extrabold text-primary">
+                {" "}
+                {cartProduct.reduce((a, c) => a + c.price, 0)}{" "}
+              </span>{" "}
+            </p>
+            <button
+              onClick={() => setShowCheckout(true)}
+              className="bg-primary rounded-lg text-black py-1 px-2"
+            >
               {" "}
               Checkout{" "}
             </button>
           </div>
         )}
+        {showCheckout && <Checkout />}
       </div>
     </div>
   );
