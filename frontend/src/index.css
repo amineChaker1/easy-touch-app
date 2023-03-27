@@ -32,11 +32,10 @@ a {
 
 header {
   grid-area: header;
+
   background-color: #000000;
   color: #ff5a5f;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+
   padding: 0.5rem;
 }
 header a {
