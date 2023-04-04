@@ -1,34 +1,42 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import data from "../../data.json";
 import dish1 from "../../assets/dish2.png";
 import CartItems from "../CartItems";
 import Checkout from "../Checkout";
+import FadeIn from "react-fade-in/lib/FadeIn";
+import { useAddDishMutation, useGetDishesQuery } from "../../app/apiSlice";
+import "./style.css";
 const ProductList = () => {
-  const [cartProduct, setCartProduct] = useState([]);
+  const [addDish, res] = useAddDishMutation();
+  const query = useGetDishesQuery();
 
-  /*const CartItem = (e) => {
-    return e;
-  };
-  console.log(products);*/
   const handleClick = (e) => {
-    console.log(e);
-    setCartProduct([...cartProduct, e]);
-    console.log(cartProduct);
+    const newDish = {
+      image: e.image,
+      title: e.title,
+      price: e.price,
+    };
+    addDish(newDish);
   };
-
+  useEffect(() => {
+    query.refetch();
+  }, [res.isLoading]);
   return (
-    <div className="grid md:grid-flow-row md:grid-cols-4 md:grid-rows-1 grid-rows-2 grid-flow-col">
+    <div className=" md:grid md:grid-flow-row md:grid-cols-4 md:grid-rows-1 grid-rows-2 grid-flow-col">
       <div className="md:col-span-3  order-1">
         <div className="grid gap-2 grid-cols-1 md:grid-cols-3">
           {data.map((product) => (
             <div className="md:w-5/6 h-fit border-2 mb-5 bg-con border-black rounded-3xl">
-              <a className="flex justify-center" href={"#" + product._id}>
-                <img
-                  className="rounded-t-2xl w-4/5 h-4/5 "
-                  src={dish1}
-                  alt=""
-                />
-              </a>
+              <FadeIn transitionDuration="800">
+                <a className="flex justify-center" href={"#" + product._id}>
+                  <img
+                    className="rounded-t-2xl w-4/5 h-4/5 "
+                    src={product.image}
+                    alt=""
+                  />
+                </a>
+              </FadeIn>
+
               <div>
                 <p className="font-bold px-4"> {product.title} </p>
                 <div className="px-4"> {product.price} DA </div>
@@ -57,8 +65,9 @@ const ProductList = () => {
         </div>
       </div>
       <div className="md:col-span-1 text-white  order-2">
-        <h1 className="text-white mb-2">Your Cart Items</h1>
-        <CartItems cartProduct={cartProduct} />
+        <h1 className="text-white mb-2">Ajouter a Votre Panier</h1>
+
+        <CartItems />
       </div>
     </div>
   );

@@ -13,13 +13,16 @@ const Home = () => {
         <ProductList />
       </main>
       <footer className="flex justify-evenly items-center ">
-        <a href="" className="text-white">
+        <a href="https://www.facebook.com/easytouchprep" className="text-white">
           Facebook
         </a>
-        <a href="" className="text-white">
+        <a
+          href="https://www.instagram.com/easy_touchdz/"
+          className="text-white"
+        >
           Instagram
         </a>
-        <a href="" className="text-white">
+        <a href="https://www.tiktok.com/@easy_touchdz" className="text-white">
           Tiktok
         </a>
       </footer>

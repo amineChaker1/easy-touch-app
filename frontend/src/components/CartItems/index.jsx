@@ -1,32 +1,42 @@
 import React, { useEffect, useState } from "react";
+import FadeIn from "react-fade-in/lib/FadeIn";
 import Checkout from "../Checkout";
+import { useDeleteDishMutation, useGetDishesQuery } from "../../app/apiSlice";
 
-const CartItems = ({ cartProduct }) => {
-  if (cartProduct.length == 0) {
-    return <div> no cart products </div>;
-  }
+const CartItems = () => {
+  const { data } = useGetDishesQuery();
+
+  const query = useGetDishesQuery();
+  const [deleteDish, res] = useDeleteDishMutation();
+
   const [showCheckout, setShowCheckout] = useState(false);
-  const productsNames = cartProduct.map((one) => one.title);
+  const productsNames = data?.map((one) => one.title);
 
+  useEffect(() => {
+    query.refetch();
+  }, [res.isLoading]);
   return (
     <>
-      {cartProduct.map((product) => (
-        <div className="flex gap-2 border-2 border-primary rounded-lg p-2 mb-2">
-          {" "}
-          <img className="w-20 " src={product.image} alt="" />{" "}
-          <div className="info flex flex-col justify-between">
-            <div>
-              <p> {product.title} </p>
-              <p> {product.price} </p>
+      <FadeIn>
+        {data?.map((product) => (
+          <div className="flex justify-evenly items-center gap-2 border-2 border-primary rounded-lg p-2 mb-2">
+            {" "}
+            <img className="w-20 " src={product.image} alt="" />{" "}
+            <div className="info  flex items-center ">
+              <div className="flex flex-col justify-center items-center mt-1 gap-5">
+                <p className="text-lg"> {product.title} </p>
+                <p className="text-right font-bold"> {product.price} DA </p>
+              </div>
             </div>
             <div>
               <svg
+                onClick={() => deleteDish(product._id)}
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
                 stroke="currentColor"
-                class="w-6 h-6 text-primary cursor-pointer"
+                class="w-6 h-6 text-primary cursor-pointer "
               >
                 <path
                   stroke-linecap="round"
@@ -36,15 +46,16 @@ const CartItems = ({ cartProduct }) => {
               </svg>
             </div>
           </div>
-        </div>
-      ))}
-      {cartProduct.length !== 0 && (
+        ))}
+      </FadeIn>
+
+      {data?.length !== 0 && (
         <div className="flex items-center  mt-8 justify-between">
           <p>
             Your Total is{" "}
             <span className="font-extrabold text-primary">
               {" "}
-              {cartProduct.reduce((a, c) => a + c.price, 0)}{" "}
+              {data?.reduce((a, c) => parseInt(a) + parseInt(c.price), 0)}{" "}
             </span>{" "}
           </p>
           <button
@@ -52,7 +63,7 @@ const CartItems = ({ cartProduct }) => {
             className="bg-primary rounded-lg text-black py-1 px-2"
           >
             {" "}
-            Checkout{" "}
+            Confirmer{" "}
           </button>
         </div>
       )}

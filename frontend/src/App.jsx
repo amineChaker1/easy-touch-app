@@ -6,13 +6,17 @@ import "./App.css";
 import Home from "./pages/Home";
 import { Route, Routes } from "react-router-dom";
 import Complete from "./components/Complete";
+import Admin from "./components/Admin";
+import Sigin from "./pages/Sigin";
+import Login from "./pages/Login";
 
 function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/app" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/complete" element={<Complete />} />
+        <Route path="/admin" element={<Admin />} />
       </Routes>
     </div>
   );
