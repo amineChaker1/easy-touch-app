@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const userSlice = createApi({
   reducerPath: "user",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:4000/auth",
+    baseUrl: "https://easytouch.onrender.com/auth",
   }),
   endpoints: (builder) => ({
     loginUser: builder.mutation({

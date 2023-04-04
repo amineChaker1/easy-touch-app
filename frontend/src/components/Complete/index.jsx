@@ -15,9 +15,13 @@ const Complete = () => {
           prochaines heures pour confirmer votre commande{" "}
           <h1 className="text-sm mt-10 mx-4">
             {" "}
-            Avec <span className="text-primary font-bold ">
+            Avec{" "}
+            <a
+              href="https://easytouchdz.web.app/"
+              className="text-primary font-bold "
+            >
               Easy Touch
-            </span>{" "}
+            </a>{" "}
             vous obtenez les meilleures plates pour le moindre effort.{" "}
           </h1>
         </span>

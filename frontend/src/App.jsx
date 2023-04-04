@@ -7,8 +7,6 @@ import Home from "./pages/Home";
 import { Route, Routes } from "react-router-dom";
 import Complete from "./components/Complete";
 import Admin from "./components/Admin";
-import Sigin from "./pages/Sigin";
-import Login from "./pages/Login";
 
 function App() {
   return (

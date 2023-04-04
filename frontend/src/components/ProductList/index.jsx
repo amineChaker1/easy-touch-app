@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import data from "../../data.json";
-import dish1 from "../../assets/dish2.png";
+
 import CartItems from "../CartItems";
-import Checkout from "../Checkout";
+
 import FadeIn from "react-fade-in/lib/FadeIn";
 import { useAddDishMutation, useGetDishesQuery } from "../../app/apiSlice";
 import "./style.css";
